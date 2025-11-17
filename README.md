@@ -12,7 +12,7 @@ The project consists of two main components:
 ## Features
 
 ### Topology Analysis (AA_TopoAttr.R)
-- Calculates contact frequency (CF) metrics 
+- Calculates contact flexibility (CF) metrics 
 - Computes local density (LD) measures
 - Generates quantile-scaled (QS) versions of all metrics
 - Calculates CF-Force Polarity Index (CF-FPI) metrics
@@ -95,7 +95,7 @@ MAX_VALUE = 1
 ### Topology Analysis Output
 - `AA_TopoAttr_<pdb_id>.txt` - Tab-separated file containing:
   - Basic information (chain, position, amino acid)
-  - Contact frequency metrics (CF10, CF10QS)
+  - Contact flexibility metrics (CF10, CF10QS)
   - Local density metrics (LD15, LD15QS) 
   - CF-Force Polarity Index (CF10QS_FPI)
 
@@ -105,7 +105,7 @@ MAX_VALUE = 1
 ## Example
 
 ![Example Visualization](pymol_demo/1ycs_CF10QS_A.png)
-*Figure 1: Visualization of CF10QS topology property for chain A of 1ycs PDB structure. Blue regions indicate lower contact frequency, red regions indicate higher contact frequency.*
+*Figure 1: Visualization of CF10QS topology property for chain A of 1ycs PDB structure. Blue regions indicate lower contact flexibility, red regions indicate higher contact frequency.*
 
 
 ## License
