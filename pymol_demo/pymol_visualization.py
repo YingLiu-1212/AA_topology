@@ -56,7 +56,7 @@ PDB_FILE = project_dir + pdb_id + ".pdb"
 TOPO_FILE = project_dir +"AA_TopoAttr_" + pdb_id + ".txt"        
 TARGET_CHAIN = chain_id               
 COLOR_SCHEME = RdBu      
-OUTPUT_IMAGE = project_dir + pdb_id + "_" + Plot_Var + "_" + chain_id + ".png"   
+OUTPUT_IMAGE = project_dir + pdb_id + "_" + plot_var + "_" + chain_id + ".png"   
 # ========================================================
 
 cmd.load(PDB_FILE)
@@ -111,3 +111,4 @@ cmd.refresh()
 cmd.rebuild()
 cmd.ray(2400, 2400)
 cmd.png(OUTPUT_IMAGE)
+
