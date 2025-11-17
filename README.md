@@ -105,7 +105,7 @@ MAX_VALUE = 1
 ## Example
 
 ![Example Visualization](pymol_demo/1ycs_CF10QS_A.png)
-*Figure 1: Visualization of CF10QS topology property for chain A of 1ycs PDB structure. Blue regions indicate lower contact flexibility, red regions indicate higher contact frequency.*
+*Figure 1: Visualization of CF10QS topology property for chain A of 1ycs PDB structure. Red regions indicate lower contact flexibility, Blue regions indicate higher contact flexibility.*
 
 
 ## License
