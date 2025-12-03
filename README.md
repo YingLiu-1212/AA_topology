@@ -1,15 +1,184 @@
 # Protein Amino Acid Topology Analysis and Visualization
 
-This repository provides tools for analyzing amino acid topology from protein structures and visualizing the results using PyMOL.
+This repository provides tools for analyzing amino acid topology from protein structures and visualizing the results using PyMOL. The study introduces a computational framework based on protein structural topology features (Contact Flexibility, Local Density, and CF-Force Polarity Index) to explain how amino acid variations affect protein expression, stability, post-translational modifications, and clinical variant interpretation.
 
-## Overview
+## 📁 Repository Structure
 
-The project consists of two main components:
+```
+AA_topology/
+├── a.resource/                 # Input data 
+├── 0.script/                  # Utility functions
+│   ├── _plot_fig.R           # Plotting functions
+│   ├──  _DN_function.R        # Distance neighbor functions
+│   ├── 2.1.dms_CYP2C9_proc.R  # Protein expression and DMS analysis
+│   ├── 2.2.dms_NUDT15_proc.R
+│   ├── 2.3.dms_PTEN_proc.R
+│   ├── 2.4.dms_TPMT_proc.R
+│   ├── 2.5.dms_domain500.R
+│   ├── 3.0.Global_TopoTrend_AA_analysis.R # Global amino acid distribution and evolution analysis
+│   ├── 3.5.paralog_sites_AF2_topo.R
+│   ├── 4.0.plot_density_proteome_topo.R
+│   ├── 4.1.SFI_deltaG.R   # Structural Fragility Index (SFI) analysis
+│   ├── 4.2.SFI_human_protein_HL.R
+│   ├── 4.3.SFI_mouse_protein_HL.R
+│   ├── 4.4.SFI_protein_sublocation.R
+│   ├── 5.0.topo_ClinGen.R    ## Clinical variant analysis (ClinGen & ClinVar)
+│   ├── 5.1.topo_ClinVar.R
+│   ├── 6.0.Uniprot_PTM_topo.R  # PTM analysis
+│   ├── 6.1.turnover_Ub_acc.R
+│   ├── 6.2.turnover_Phos_acc.R
+│   ├── 6.3.AD_Phos_acc.R   # Alzheimer's disease analysis
+│   ├── 7.0.tcga_topo_proc.R   # Clinical data processing
+│   ├── 7.1.tcga_rd_response.R
+│   ├── 7.2.plot_TCGA_other_interval.R   # TDDA analysis in cancer
+│   ├── 7.3.plot_TDDA_cor.R
+│   ├── 7.4.TCGA_ASPD_count_ROC.R
+│   ├── 7.5.TCGA_ASPD_count_survival.R
+│   └──  7.6.TCGA_ASPD_0-1_survival.R
+
+├── b.Protein_expression/      # Protein expression and DMS analysis
+├── c.Global_analysis/         # Global amino acid distribution and evolution analysis
+├── d.SFI/                     # Structural Fragility Index (SFI) analysis
+├── e.Clinical_SNVs/           # Clinical variant analysis (ClinGen & ClinVar)
+├── f.PTM&AD/                  # Post-translational modifications and Alzheimer's disease analysis
+├── g.Cancer/                  # TDDA analysis in cancer
+├── o.output_figures/          # Generated figures
+
+```
+
+---
+
+## 1️⃣ System Requirements
+
+### Operating System
+- **Linux** or **Windows** 
+- Tested on: Ubuntu 22.04 LTS, Windows 11 
+
+### Software Dependencies
+- **R** (version 4.1.3)
+
+### R Package Dependencies (Key Versions)
+| Package | Version | Source |
+|---------|---------|--------|
+| `ggplot2` | 3.4.0 | CRAN |
+| `dplyr` | 1.1.0 | CRAN |
+| `bio3d` | 2.4.4 | CRAN |
+| `ggpubr` | 0.6.0 | CRAN |
+| `stringr` | 1.5.0 | CRAN |
+| `tidyr` | 1.3.0 | CRAN |
+| `reshape2` | 1.4.4 | CRAN |
+| `ggrepel` | 0.9.3 | CRAN |
+| `pROC` | 1.18.0 | CRAN |
+| `RColorBrewer` | 1.1.3 | CRAN |
+| `ggdensity` | 0.1.0 | CRAN |
+| `ggpubr` | 0.6.0 | CRAN |
+
+### Hardware Requirements
+- **Memory**: ≥ 16 GB (64 GB recommended for full proteome analysis)
+- **Storage**: ≥ 50 GB (for input data and output files)
+- **CPU**: 4+ cores (8+ recommended)
+
+---
+
+## 2️⃣ Installation Guide
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/YingLiu-1212/AA_topology.git
+cd AA_topology
+```
+
+### Step 2: Install R and Dependencies
+```r
+# Install required R packages
+install.packages(c("ggplot2", "dplyr", "bio3d", "ggpubr", "stringr", 
+                   "tidyr", "reshape2", "ggrepel", "pROC", 
+                   "RColorBrewer", "ggdensity"))
+```
+
+---
+
+## 3️⃣ Demo (NUDT15 DMS Analysis)
+
+### Step 1: Prepare Data
+Ensure the following files exist in `a.resource/NUDT15/`:
+- `DMS_NUDT15_abundance.txt`
+- `AA_topology_AF-Q9NV35-F1-model_v4_chains.csv`
+
+### Step 2: Run the Script
+```bash
+cd b.Protein_expression
+Rscript 2.2.dms_NUDT15_proc.R
+```
+
+### Step 3: Check Output
+The script will generate:
+- `dms_topo_NUDT15.csv` (processed data table)
+- `../o.output_figures/DMS_NUDT15.pdf` (scatter plots of CF10/LD15 vs. expression/activity scores)
+
+### Expected Runtime
+- **Data preparation**: < 1 minute
+- **Script execution**: ~2 minutes
+- **Total time**: ~3 minutes
+
+---
+
+## 4️⃣ Instructions for Use
+
+### Running Other Analyses
+Each script is an independent module. Run them as:
+```bash
+cd [module_directory]
+Rscript [script_name].R
+```
+
+### **Analysis Modules**
+Each numbered directory corresponds to a main figure in the paper:
+- **2.Protein_expression**: DMS analysis
+- **3.Global_analysis**: Amino acid distribution and evolution
+- **4.SFI_analysis**: Structural Fragility Index calculations 
+- **5.Clinical_variants**: Clinical variant analysis 
+- **6.PTM_AD_analysis**: PTM and Alzheimer's disease
+- **7.Cancer_metastasis**: Cancer metastasis and TDDA 
+
+---
+
+## 5️⃣ Reproducing Paper Results
+
+### Step 1: Environment and Data Setup
+- Install R and all dependencies
+- Download all data 
+- Verify directory structure
+
+### Step 2: Run Scripts in Order (Recommended)
+`0.script/*.R` 
+
+
+### Step 3: Verify Output
+Outputs are saved in:
+- CSV files in each module directory (data tables)
+- PDF files in `o.output_figures/` (figures)
+
+### Estimated Total Runtime
+- ~4–6 hours (depends on CPU and memory)
+
+---
+
+## 📊 Output File Descriptions
+
+| File Type | Description | Example |
+|-----------|-------------|---------|
+| `.csv` | Processed data tables | `dms_topo_NUDT15.csv` |
+| `.pdf` | High-quality figures | `DMS_NUDT15.pdf` |
+| `.rdata` | R data objects (intermediate) | `AF2_AA_TopoTrend_dedup.rdata` |
+
+---
+
+## To Analyze Your Own Protein
 
 1. **AA_TopoAttr.R** - An R script that calculates various amino acid topology features from PDB files
 2. **pymol_visualization.py** - A PyMOL script for visualizing the calculated topology properties
 
-## Features
 
 ### Topology Analysis (AA_TopoAttr.R)
 - Calculates contact flexibility (CF) metrics 
@@ -25,31 +194,8 @@ The project consists of two main components:
 - Customizable cartoon representation with smooth rendering
 - High-resolution output (2400×2400 pixels)
 
-## Prerequisites
 
-### For Topology Analysis
-- R (version 4.0+)
-- Required R packages:
-  - bio3d
-  - dplyr
-  - stringr
-
-### For Visualization
-- PyMOL (version 2.0+)
-- Python (with PyMOL module)
-
-## Installation
-
-1. Install R dependencies:
-```R
-install.packages(c("bio3d", "dplyr", "stringr"))
-```
-
-2. Ensure PyMOL is installed and accessible from command line.
-
-## Usage
-
-### Step 1: Calculate Topology Attributes
+### Calculate Topology Attributes
 
 Run the R script with a PDB file:
 
@@ -64,7 +210,7 @@ Rscript AA_TopoAttr.R pymol_demo/1ycs.pdb pymol_demo/
 
 This generates a topology attribute file: `AA_TopoAttr_1ycs.txt`
 
-### Step 2: Visualize in PyMOL
+### Visualize in PyMOL
 
 1. Open PyMOL
 2. Load and run the visualization script:
@@ -108,6 +254,9 @@ MAX_VALUE = 1
 *Figure 1: Visualization of CF10QS topology property for chain A of 1ycs PDB structure. Red regions indicate lower contact flexibility, Blue regions indicate higher contact flexibility.*
 
 
-## License
+## ✅ License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is open-source under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
