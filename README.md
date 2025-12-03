@@ -58,20 +58,20 @@ AA_topology/
 - **R** (version 4.1.3)
 
 ### R Package Dependencies (Key Versions)
-| Package | Version | Source |
-|---------|---------|--------|
-| `ggplot2` | 3.4.0 | CRAN |
-| `dplyr` | 1.1.0 | CRAN |
-| `bio3d` | 2.4.4 | CRAN |
-| `ggpubr` | 0.6.0 | CRAN |
-| `stringr` | 1.5.0 | CRAN |
-| `tidyr` | 1.3.0 | CRAN |
-| `reshape2` | 1.4.4 | CRAN |
-| `ggrepel` | 0.9.3 | CRAN |
-| `pROC` | 1.18.0 | CRAN |
-| `RColorBrewer` | 1.1.3 | CRAN |
-| `ggdensity` | 0.1.0 | CRAN |
-| `ggpubr` | 0.6.0 | CRAN |
+| Package | Version | 
+|---------|---------|
+| `ggplot2` | 3.4.0 |
+| `dplyr` | 1.1.0 |
+| `bio3d` | 2.4.4 |
+| `ggpubr` | 0.6.0 | 
+| `stringr` | 1.5.0 |
+| `tidyr` | 1.3.0 | 
+| `reshape2` | 1.4.4 |
+| `ggrepel` | 0.9.3 |
+| `pROC` | 1.18.0 |
+| `RColorBrewer` | 1.1.3 | 
+| `ggdensity` | 0.1.0 |
+| `ggpubr` | 0.6.0 |
 
 ### Hardware Requirements
 - **Memory**: ≥ 16 GB (64 GB recommended for full proteome analysis)
