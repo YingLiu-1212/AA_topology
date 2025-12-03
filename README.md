@@ -128,7 +128,7 @@ The script will generate:
 ### Running Other Analyses
 Each script is an independent module. Run them as:
 ```bash
-cd [module_directory]
+cd 0.script
 Rscript [script_name].R
 ```
 
