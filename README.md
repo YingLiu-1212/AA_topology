@@ -107,7 +107,7 @@ Ensure the following files exist in `a.resource/NUDT15/`:
 
 ### Step 2: Run the Script
 ```bash
-cd b.Protein_expression
+cd 0.script
 Rscript 2.2.dms_NUDT15_proc.R
 ```
 
