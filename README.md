@@ -7,9 +7,9 @@ This repository provides tools for analyzing amino acid topology from protein st
 ```
 AA_topology/
 ├── a.resource/                 # Input data 
-├── 0.script/                  # Utility functions
+├── 0.script/                 
 │   ├── _plot_fig.R           # Plotting functions
-│   ├──  _DN_function.R        # Distance neighbor functions
+│   ├── _DN_function.R        # Distance neighbor functions
 │   ├── 2.1.dms_CYP2C9_proc.R  # Protein expression and DMS analysis
 │   ├── 2.2.dms_NUDT15_proc.R
 │   ├── 2.3.dms_PTEN_proc.R
@@ -34,7 +34,7 @@ AA_topology/
 │   ├── 7.3.plot_TDDA_cor.R
 │   ├── 7.4.TCGA_ASPD_count_ROC.R
 │   ├── 7.5.TCGA_ASPD_count_survival.R
-│   └──  7.6.TCGA_ASPD_0-1_survival.R
+│   └── 7.6.TCGA_ASPD_0-1_survival.R
 
 ├── b.Protein_expression/      # Protein expression and DMS analysis
 ├── c.Global_analysis/         # Global amino acid distribution and evolution analysis
@@ -51,8 +51,8 @@ AA_topology/
 ## 1️⃣ System Requirements
 
 ### Operating System
-- **Linux** or **Windows** 
-- Tested on: Ubuntu 22.04 LTS, Windows 11 
+- **Linux** 
+- Tested on: Rocky Linux 8.7 
 
 ### Software Dependencies
 - **R** (version 4.1.3)
@@ -60,18 +60,19 @@ AA_topology/
 ### R Package Dependencies (Key Versions)
 | Package | Version | 
 |---------|---------|
-| `ggplot2` | 3.4.0 |
-| `dplyr` | 1.1.0 |
+| `ggplot2` | 3.5.1 |
+| `dplyr` | 1.1.4 |
 | `bio3d` | 2.4.4 |
 | `ggpubr` | 0.6.0 | 
 | `stringr` | 1.5.0 |
-| `tidyr` | 1.3.0 | 
+| `tidyr` | 1.3.1 | 
 | `reshape2` | 1.4.4 |
-| `ggrepel` | 0.9.3 |
-| `pROC` | 1.18.0 |
-| `RColorBrewer` | 1.1.3 | 
-| `ggdensity` | 0.1.0 |
+| `ggrepel` | 0.9.6 |
+| `pROC` | 1.18.5 |
+| `ggdensity` | 1.0.0 |
 | `ggpubr` | 0.6.0 |
+| `survival` | 3.7.0 |
+| `survminer` | 0.4.9 |
 
 ### Hardware Requirements
 - **Memory**: ≥ 16 GB (64 GB recommended for full proteome analysis)
@@ -134,12 +135,12 @@ Rscript [script_name].R
 
 ### **Analysis Modules**
 Each numbered directory corresponds to a main figure in the paper:
-- **2.Protein_expression**: DMS analysis
-- **3.Global_analysis**: Amino acid distribution and evolution
-- **4.SFI_analysis**: Structural Fragility Index calculations 
-- **5.Clinical_variants**: Clinical variant analysis 
-- **6.PTM_AD_analysis**: PTM and Alzheimer's disease
-- **7.Cancer_metastasis**: Cancer metastasis and TDDA 
+- **b.Protein_expression**: DMS analysis
+- **c.Global_analysis**: Amino acid distribution and evolution
+- **d.SFI**: Structural Fragility Index calculations 
+- **e.Clinical_SNVs**: Clinical variant analysis 
+- **f.PTM&AD**: PTM and Alzheimer's disease
+- **g.Cancer**: Cancer metastasis and TDDA 
 
 ---
 
@@ -148,10 +149,13 @@ Each numbered directory corresponds to a main figure in the paper:
 ### Step 1: Environment and Data Setup
 - Install R and all dependencies
 - Download all data 
-- Verify directory structure
+- Extract all compressed directory
 
 ### Step 2: Run Scripts in Order (Recommended)
-`0.script/*.R` 
+```bash
+cd 0.script
+Rscript [script_name].R
+```
 
 
 ### Step 3: Verify Output
@@ -174,7 +178,9 @@ Outputs are saved in:
 
 ---
 
-## To Analyze Your Own Protein
+# To Analyze Your Own Protein
+
+## Tools
 
 1. **AA_TopoAttr.R** - An R script that calculates various amino acid topology features from PDB files
 2. **pymol_visualization.py** - A PyMOL script for visualizing the calculated topology properties
@@ -210,7 +216,7 @@ Rscript AA_TopoAttr.R pymol_demo/1ycs.pdb pymol_demo/
 
 This generates a topology attribute file: `AA_TopoAttr_1ycs.txt`
 
-### Visualize in PyMOL
+## Visualize in PyMOL
 
 1. Open PyMOL
 2. Load and run the visualization script:
